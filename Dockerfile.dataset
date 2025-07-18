@@ -1,0 +1,60 @@
+FROM python:3.12
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+    hackrf \
+    git \
+    cmake \
+    alsa-utils \
+    libuhd-dev \
+    libhackrf-dev \
+    libgtk-3-dev \
+    ffmpeg 
+
+RUN pip install --upgrade pip setuptools wheel
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+# RUN apt install -y gnuradio
+
+# RUN mkdir gnuradio
+# RUN workdir /gnuradio
+
+# #Installing gr-correctiq
+# RUN git clone https://github.com/ghostop14/gr-correctiq.git && \
+#     cd gr-correctiq && \
+#     mkdir build && \
+#     cd build && \
+#     cmake .. && \
+#     make && \
+#     make install && \
+#     ldconfig
+
+# WORKDIR /
+
+RUN apt install -y xterm rtl-sdr
+RUN apt install -y gr-osmosdr
+
+# Install whisper.cpp
+RUN git clone https://github.com/ggerganov/whisper.cpp.git
+WORKDIR /whisper.cpp
+RUN sh ./models/download-ggml-model.sh large-v3-turbo && \
+    make -j12
+
+# Font to show some sort of emoji on tkinter terminal
+RUN apt install fonts-symbola
+
+WORKDIR /
+
+# Copy the entrypoint bash script
+COPY ./entrypoint.sh ./
+# # # Remove the HackRF support module because there were duplicate modules
+# # RUN rm /usr/lib/x86_64-linux-gnu/SoapySDR/modules0.8/libHackRFSupport.so
+# RUN pip install 
+
+RUN chmod +x ./entrypoint.sh
+ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]

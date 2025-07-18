@@ -1,0 +1,48 @@
+services:
+  dataset:
+    container_name: dataset
+    build:
+      context: .
+      dockerfile: Dockerfile.dataset
+    volumes:
+      - ./app:/app
+      - ./test:/test
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./logs:/logs
+
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"
+      - "/dev/snd:/dev/snd"
+    environment:  
+      - DISPLAY=${DISPLAY}  
+      - QT_X11_NO_MITSHM=1
+    env_file:
+      - .env
+    privileged: true
+    network_mode: host
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+
+  # nemo:
+  #   container_name: nemo
+  #   build:
+  #     context: .
+  #     dockerfile: ./nvidia/Dockerfile.nvidia  # Use if you're extending the base image
+  #   runtime: runc  # Use the default runtime for AMD GPU
+  #   # environment:
+  #     # Specify necessary environment variables, if any
+  #     # Example:
+  #     # ENV_VAR: value
+  #   volumes:
+  #     - ./nvidia/data:/nvidia/data  # Mount local directory to container
+  #   command: "/bin/bash"  # Start the container with bash
+  #   stdin_open: true  # Keep STDIN open to run interactive commands
+  #   tty: true  # Allocate a pseudo-TTY for interactive shell
+  #   ipc: host  # Use the host’s shared memory
+  #   ulimits:
+  #     memlock: -1  # Remove memory locking limit
+  #     stack: 67108864  # Increase stack size limit

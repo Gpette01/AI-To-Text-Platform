@@ -1,0 +1,41 @@
+
+Add this after the self.resetGeometry for size and location change:
+
+# **************** Set GUI position and size ****************
+screen = Qt.QApplication.primaryScreen().availableGeometry()  # Get screen size
+screen_width = screen.width()
+screen_height = screen.height()
+# Set window to right half of the screen
+self.setGeometry(screen_width, 100, screen_width // 2, screen_height)
+# ***********************************************************
+
+Add this below check_set_qss for theme color change:
+
+# Apply dark theme
+dark_stylesheet = """
+QWidget {
+    background-color: #242424;
+    color: #FFFFFF;
+}
+QPushButton {
+    background-color: #555555;
+    color: #FFFFFF;
+    border: 1px solid #777777;
+    border-radius: 5px;
+    padding: 5px;
+}
+QPushButton:hover {
+    background-color: #777777;
+}
+QLineEdit {
+    background-color: #3E3E3E;
+    color: #FFFFFF;
+    border: 1px solid #777777;
+    padding: 5px;
+}
+QScrollBar:vertical, QScrollBar:horizontal {
+    background: #2E2E2E;
+    border: 1px solid #555555;
+}
+"""
+self.setStyleSheet(dark_stylesheet)

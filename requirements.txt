@@ -1,0 +1,70 @@
+# Speech recognition and audio processing
+SpeechRecognition
+pydub
+soundfile
+
+# General utilities and dependencies
+packaging
+colorama
+setuptools
+jsonschema
+
+# Web and templating
+Mako
+lxml
+
+# Scientific computing and data processing
+numpy
+scipy
+matplotlib
+
+# Machine learning and NLP
+torch
+transformers
+datasets[audio]
+accelerate
+
+# GUI and plotting
+pyqt5
+pyqtgraph
+qtpy
+
+# Documentation
+sphinx
+
+# YAML processing
+pyyaml
+
+# Command-line interface
+click
+click-plugins
+
+# ZeroMQ for messaging
+zmq
+
+# C++ code parsing
+pygccxml
+
+# Audio processing
+pyannote.audio
+
+# Environment variables
+python-dotenv
+
+#RTLSDR
+pyrtlsdr
+
+# HACKRF
+pyhackrf
+
+# Faster Whisper
+faster_whisper
+
+#Front-end
+customtkinter 
+tkintermapview
+
+# KrakenSDR mock data
+pynput
+
+sounddevice
