@@ -129,6 +129,7 @@ python3 ./main.py
 ```
 
 ### Manual Installation
+## Not needed for docker, eveyrthing in install via docker
 
 1. **Install system dependencies:**
 ```bash
