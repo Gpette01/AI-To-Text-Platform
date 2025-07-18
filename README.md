@@ -129,7 +129,7 @@ python3 ./main.py
 ```
 
 ### Manual Installation
-## Not needed for docker, eveyrthing in install via docker
+## Not needed for docker, eveyrthing is installed automatically
 
 1. **Install system dependencies:**
 ```bash
